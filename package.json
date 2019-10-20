@@ -1,6 +1,6 @@
 {
   "name": "transbatam-api",
-  "version": "1.0",
+  "version": "1.0.0",
   "private": false,
   "description": "An API that for transbatam bus",
   "main": "./bin/www",
