@@ -20,7 +20,8 @@ const locationSchema = new Schema({
     },
     busId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bus'
+        ref: 'Bus',
+        required: true
     }
 }, {
     timestamps: true
