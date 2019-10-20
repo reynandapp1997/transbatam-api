@@ -6,7 +6,7 @@ const {
     addBustLastLocation
 } = require('../controllers/location');
 
-router.get('/:id', getBusLastLocation);
+router.get('/', getBusLastLocation);
 router.post('/', addBustLastLocation);
 
 module.exports = router;

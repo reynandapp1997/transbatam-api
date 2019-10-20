@@ -164,9 +164,10 @@ describe('BUS', () => {
 describe('LOCATION', () => {
     it('GET BUS LAST LOCATION', done => {
         chai.request(server)
-            .get(`/api/location/${busId}`)
+            .get(`/api/location`)
             .end((err, res) => {
-                expected(res.status).eql(404);
+                expected(res.status).eql(200);
+                expected(res.body.length).eql(0);
                 done();
             });
     });
@@ -215,9 +216,10 @@ describe('LOCATION', () => {
 
     it('GET BUS LAST LOCATION', done => {
         chai.request(server)
-            .get(`/api/location/${busId}`)
+            .get(`/api/location`)
             .end((err, res) => {
                 expected(res.status).eql(200);
+                expected(res.body.length).eql(1);
                 done();
             });
     });
@@ -225,15 +227,6 @@ describe('LOCATION', () => {
     it('ADD BUS LAST LOCATION NEGATIVE TEST', done => {
         chai.request(server)
             .post('/api/location')
-            .end((err, res) => {
-                expected(res.status).eql(400);
-                done();
-            });
-    });
-
-    it('GET BUS LAST LOCATION NEGATIVE TEST', done => {
-        chai.request(server)
-            .get(`/api/location/123`)
             .end((err, res) => {
                 expected(res.status).eql(400);
                 done();

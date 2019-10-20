@@ -1,15 +1,19 @@
+const Bus = require('../models/bus');
 const Location = require('../models/location');
 
-exports.getBusLastLocation = (req, res, next) => {
-    const id = req.params.id;
-    return Location.findOne({ busId: id })
+exports.getBusLastLocation = async (req, res, next) => {
+    let busId = await Bus.find().select('_id');
+    busId = busId.map(el => el._id);
+    return Location.find({ busId: { $in: busId } })
         .populate('busId')
         .sort({ createdAt: -1 })
         .then(result => {
-            if (!result) {
-                return res.status(404).json({ message: 'No location' })
-            }
-            return res.status(200).json({ data: result })
+            const uniqLocation = result.filter((thing, index, self) => {
+                return index === self.findIndex((t) => (
+                    t.busId._id === thing.busId._id
+                ));
+            });
+            return res.status(200).json({ length: uniqLocation.length, data: uniqLocation });
         })
         .catch(error => res.status(400).json({ message: error.toString() }));
 };
