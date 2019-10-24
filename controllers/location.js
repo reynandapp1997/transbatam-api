@@ -1,3 +1,5 @@
+const io = require('../socket');
+
 const Bus = require('../models/bus');
 const Location = require('../models/location');
 
@@ -34,6 +36,12 @@ exports.addBustLastLocation = (req, res, next) => {
         busId
     });
     return newLocation.save()
-        .then(result => res.status(201).json({ message: 'Success add bus location' }))
+        .then(result => {
+            io.getIO().emit('location', {
+                type: 'ADD_LOCATION',
+                payload: result
+            });
+            return res.status(201).json({ message: 'Success add bus location' });
+        })
         .catch(error => res.status(400).json({ message: error.toString() }));
 };
