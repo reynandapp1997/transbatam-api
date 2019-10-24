@@ -37,10 +37,12 @@ exports.addBustLastLocation = (req, res, next) => {
     });
     return newLocation.save()
         .then(result => {
-            io.getIO().emit('location', {
-                type: 'ADD_LOCATION',
-                payload: result
-            });
+            if (process.env.ENVIRONMENT === 'PRODUCTION') {
+                io.getIO().emit('location', {
+                    type: 'ADD_LOCATION',
+                    payload: result
+                });
+            }
             return res.status(201).json({ message: 'Success add bus location' });
         })
         .catch(error => res.status(400).json({ message: error.toString() }));
