@@ -35,7 +35,8 @@ describe('BUS', () => {
             .post('/api/bus')
             .send({
                 plateNumber: 'BP 123 AB',
-                driver: 'Reynanda'
+                driver: 'Reynanda',
+                entryPoint: ['A', 'B', 'C']
             })
             .end((err, res) => {
                 expected(res.status).eql(201);
@@ -48,7 +49,8 @@ describe('BUS', () => {
             .post('/api/bus')
             .send({
                 plateNumber: 'BP 456 CD',
-                driver: 'Putra'
+                driver: 'Putra',
+                entryPoint: ['A', 'B', 'C']
             })
             .end((err, res) => {
                 expected(res.status).eql(201);

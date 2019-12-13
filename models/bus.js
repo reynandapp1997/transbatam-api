@@ -13,7 +13,11 @@ const busSchema = new Schema({
     status: {
         type: Boolean,
         default: false
-    }
+    },
+    entryPoint: [{
+        type: String,
+        required: true
+    }]
 }, {
     timestamps: true
 });

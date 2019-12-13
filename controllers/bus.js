@@ -9,11 +9,13 @@ exports.getBus = (req, res, next) => {
 exports.addBus = (req, res, next) => {
     const {
         plateNumber,
-        driver
+        driver,
+        entryPoint
     } = req.body;
     const newBus = new Bus({
         plateNumber,
-        driver
+        driver,
+        entryPoint
     });
     return newBus.save()
         .then(result => res.status(201).json({ message: 'Success add new bus' }))
@@ -25,12 +27,14 @@ exports.updateBus = (req, res, next) => {
     const {
         plateNumber,
         driver,
+        entryPoint,
         status
     } = req.body;
     const newBus = new Bus({
         _id: id,
         plateNumber,
         driver,
+        entryPoint,
         status
     });
     return Bus.findOneAndUpdate({ _id: id }, newBus, { runValidators: true }, (error, document, result) => {
