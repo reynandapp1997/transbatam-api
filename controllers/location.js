@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 const io = require('../socket');
 
 const Bus = require('../models/bus');
@@ -6,7 +8,7 @@ const Location = require('../models/location');
 exports.getBusLastLocation = async (req, res, next) => {
     let busId = await Bus.find().select('_id');
     busId = busId.map(el => el._id);
-    return Location.find({ busId: { $in: busId } })
+    return Location.find({ busId: { $in: busId }, createdAt: { $gte: moment().startOf('day').toDate(), $lte: moment().endOf('day').toDate() } })
         .populate('busId')
         .sort({ createdAt: -1 })
         .then(result => {
