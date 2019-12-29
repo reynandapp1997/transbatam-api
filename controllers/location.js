@@ -39,6 +39,7 @@ exports.addBustLastLocation = (req, res, next) => {
     });
     return newLocation.save()
         .then(result => {
+            /* istanbul ignore if */
             if (process.env.ENVIRONMENT === 'PRODUCTION') {
                 io.getIO().emit('location', {
                     type: 'ADD_LOCATION',

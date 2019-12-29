@@ -21,6 +21,7 @@ app.set('view engine', 'hbs');
 
 app.use(sslRedirect());
 app.use(cors());
+/* istanbul ignore if */
 if (process.env.ENVIRONMENT === 'PRODUCTION') {
   app.use(logger('dev'));
 }
@@ -53,6 +54,7 @@ mongoose.connect(MONGODB_URI, {
   useCreateIndex: true,
   useUnifiedTopology: true
 }, (err) => {
+  /* istanbul ignore next */
   if (err) {
     return console.log(err);
   } else if (process.env.ENVIRONMENT === 'PRODUCTION') {

@@ -20,6 +20,15 @@ describe('BUS', () => {
         });
     });
 
+    it('404', done => {
+        chai.request(server)
+            .get('/')
+            .end((err, res) => {
+                expected(res.status).eql(404);
+                done();
+            });
+    });
+
     it('GET BUS WITH 0 DATA', done => {
         chai.request(server)
             .get('/api/bus')
