@@ -4,7 +4,7 @@ const router = express.Router();
 const {
     getBusLastLocation,
     addBustLastLocation
-} = require('../controllers/location');
+} = require('../controllers/location.controller');
 
 router.get('/', getBusLastLocation);
 router.post('/', addBustLastLocation);

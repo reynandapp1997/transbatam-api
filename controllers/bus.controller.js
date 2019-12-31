@@ -1,4 +1,4 @@
-const Bus = require('../models/bus');
+const Bus = require('../models/bus.model');
 
 exports.getBus = (req, res, next) => {
     return Bus.find()

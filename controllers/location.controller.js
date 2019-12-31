@@ -2,8 +2,8 @@ const moment = require('moment');
 
 const io = require('../socket');
 
-const Bus = require('../models/bus');
-const Location = require('../models/location');
+const Bus = require('../models/bus.model');
+const Location = require('../models/location.model');
 
 exports.getBusLastLocation = async (req, res, next) => {
     let busId = await Bus.find().select('_id');
